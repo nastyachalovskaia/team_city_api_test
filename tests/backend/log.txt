@@ -1,0 +1,55 @@
+2025-04-02 13:46:49 INFO [32mpytest tests/backend/create_project.py::TestProjectCreate::test_create_project (setup)[0m
+curl -X GET 'http://localhost:8111/authenticationTest.html?csrf' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: */*' \
+-H 'Connection: keep-alive' \
+-H 'Authorization: Basic OjM0OTgxNTExOTM1Nzk5OTE4MjU=' \
+
+2025-04-02 13:46:50 INFO [32mpytest tests/backend/create_project.py::TestProjectCreate::test_create_project[0m
+curl -X POST 'http://localhost:8111/app/rest/projects' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'X-TC-CSRF-Token: 56df7380-ca30-449a-8b00-32e041b047f9' \
+-H 'Cookie: TCSESSIONID=AA578073F79AF97E1A44C1D211403836; RecentLogin=' \
+-H 'Content-Length: 112' \
+-H 'Authorization: Basic OjM0OTgxNTExOTM1Nzk5OTE4MjU=' \
+-d '{"parentProject": {"locator": "_Root"}, "name": "color", "id": "ttUew7IPIf4", "copyAllAssociatedSettings": true}' 
+
+2025-04-02 13:46:50 INFO [32mpytest tests/backend/create_project.py::TestProjectCreate::test_create_project[0m
+curl -X GET 'http://localhost:8111/app/rest/projects/color' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'X-TC-CSRF-Token: 56df7380-ca30-449a-8b00-32e041b047f9' \
+-H 'Cookie: TCSESSIONID=AA578073F79AF97E1A44C1D211403836' \
+-H 'Authorization: Basic OjM0OTgxNTExOTM1Nzk5OTE4MjU=' \
+
+2025-04-02 13:46:50 INFO [32mpytest tests/backend/create_project.py::TestProjectCreate::test_create_project (teardown)[0m
+curl -X DELETE 'http://localhost:8111/app/rest/projects/id:ttUew7IPIf4' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'X-TC-CSRF-Token: 56df7380-ca30-449a-8b00-32e041b047f9' \
+-H 'Cookie: TCSESSIONID=AA578073F79AF97E1A44C1D211403836' \
+-H 'Content-Length: 0' \
+-H 'Authorization: Basic OjM0OTgxNTExOTM1Nzk5OTE4MjU=' \
+
+2025-04-02 13:46:50 INFO [32mpytest tests/backend/create_project.py::TestProjectCreate::test_create_project (teardown)[0m
+curl -X GET 'http://localhost:8111/app/rest/projects' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'X-TC-CSRF-Token: 56df7380-ca30-449a-8b00-32e041b047f9' \
+-H 'Cookie: TCSESSIONID=AA578073F79AF97E1A44C1D211403836' \
+-H 'Authorization: Basic OjM0OTgxNTExOTM1Nzk5OTE4MjU=' \
+
