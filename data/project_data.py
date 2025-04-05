@@ -1,3 +1,4 @@
+import time
 from typing import Optional
 from pydantic import BaseModel
 from utils.data_generator import DataGenerator
@@ -13,7 +14,7 @@ class ProjectData:
     def create_project_data() -> ProjectDataModel:
         return ProjectDataModel(
             parentProject={"locator": "_Root"},
-            name=DataGenerator.fake_name(),
+            name=f"{DataGenerator.fake_name()}_{int(time.time())}",
             id=DataGenerator.fake_project_id(),
             copyAllAssociatedSettings=True
         )
