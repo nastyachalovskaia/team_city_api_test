@@ -1,5 +1,4 @@
 import time
-import uuid
 from typing import List
 from pydantic import BaseModel
 from utils.data_generator import DataGenerator

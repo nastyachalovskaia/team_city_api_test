@@ -20,7 +20,7 @@ Accept: application/json
 POST http://admin:admin@localhost:8111/app/rest/projects
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: 93118c60-a08e-4f05-824f-4c95cc332e92
+X-TC-CSRF-Token: f446e71e-8800-4b38-99f3-52e383b637fd
 
 {
   "parentProject": {
@@ -36,7 +36,7 @@ X-TC-CSRF-Token: 93118c60-a08e-4f05-824f-4c95cc332e92
 POST http://admin:admin@localhost:8111/app/rest/buildTypes
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: 93118c60-a08e-4f05-824f-4c95cc332e92
+X-TC-CSRF-Token: f446e71e-8800-4b38-99f3-52e383b637fd
 
 {
   "id": "BuildConfId",
@@ -74,7 +74,7 @@ X-TC-CSRF-Token: 93118c60-a08e-4f05-824f-4c95cc332e92
 POST http://admin:admin@localhost:8111/app/rest/buildQueue
 Content-Type: application/json
 Accept: application/json
-X-TC-CSRF-Token: 19de1a6d-c473-4459-b048-e9ac69c9fbdd
+X-TC-CSRF-Token: 96e740f6-401b-4393-aa1c-c321444de77d
 
 {
   "buildType": {

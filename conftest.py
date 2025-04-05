@@ -7,6 +7,7 @@ import requests
 from api.api_manager import ApiManager
 from data.build_config_data import BuildConfigData, BuildResponseModel
 from data.project_data import ProjectData, ProjectResponseModel
+from data.start_build_data import StartBuildData, StartBuildDataModel, StartBuildResponseModel
 from data.user_data import UserData
 from entities.role import Role
 from entities.user import User
@@ -55,9 +56,6 @@ def user_create(user_session, super_admin):
     for username in created_users_pool:
         super_admin.api_manager.user_api.delete_user(username)
 
-PROJECT_IDS_TO_DELETE = []
-BUILD_IDS_TO_DELETE = []
-
 @pytest.fixture(scope="session")
 def created_project(super_admin):
     created_projects = []
@@ -70,7 +68,6 @@ def created_project(super_admin):
 
         created_project = ProjectResponseModel.model_validate_json(response.text)
         created_projects.append(created_project.id)
-        PROJECT_IDS_TO_DELETE.append(created_project.id)
 
         print(f"Создан проект ID: {created_project.id}")
 
@@ -78,26 +75,42 @@ def created_project(super_admin):
 
     yield _created_project
 
+    for project_id in created_projects:
+        try:
+            if super_admin.api_manager.project_api.get_project(project_id).status_code == 200:
+                super_admin.api_manager.project_api.delete_project(project_id)
+                print(f"Удалён проект {project_id}")
+        except Exception as e:
+            print(f"Ошибка при удалении проекта {project_id}: {e}")
+
+
 @pytest.fixture
 def build_config_data(super_admin):
+    builds_pool = []
 
     def _build_config_data(project_id: str):
         build = BuildConfigData.build_config_data(project_id)
         response = super_admin.api_manager.build_conf_api.create_build(build.model_dump())
         created_build = BuildResponseModel.model_validate_json(response.text)
-        BUILD_IDS_TO_DELETE.append(created_build.id)
+        builds_pool.append(created_build.id)
 
         return created_build
 
     yield _build_config_data
 
-    for build_id in BUILD_IDS_TO_DELETE:
+    for build_id in builds_pool:
         try:
             super_admin.api_manager.build_conf_api.delete_build(build_id)
         except Exception as e:
             print(f"Ошибка при удалении билда {build_id}: {e}")
-    for id_project in PROJECT_IDS_TO_DELETE:
-        try:
-            super_admin.api_manager.project_api.clean_up_project(id_project)
-        except Exception as e:
-            print(f"Ошибка при удалении проекта {id_project}: {e}")
+
+@pytest.fixture
+def start_build(super_admin):
+    def _start_build(build_config_id: str):
+        build_start_data = StartBuildData.start_build(build_config_id)
+        response = super_admin.api_manager.start_build_api.start_build(build_start_data.model_dump())
+        build = StartBuildResponseModel.model_validate_json(response.text)
+
+        return build
+
+    yield _start_build
